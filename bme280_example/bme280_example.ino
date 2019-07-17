@@ -24,7 +24,7 @@ void setup() {
 }
 
 void loop() {
-  plotGraph();
+  plotParametricGraph();
   delay(DELAY_MS);
 }
 
@@ -64,6 +64,14 @@ float float_cos(float x) {
   return (float) cos(x + a / 5.0);
 }
 
+float lissajous_x(float t) {
+  return (float) cos(3 * t);
+}
+
+float lissajous_y(float t) {
+  return (float) sin(4 * t);
+}
+
 void plotGraph() {
   M5.Lcd.fillScreen(LIGHTGREY);
 
@@ -83,4 +91,35 @@ void plotGraph() {
   screen.plotGraph(float_cos, graphRect4, screenRect4, BLUE);
 
   a++;
+}
+
+#define N 100
+
+int n = 0;
+
+bool erase = false;
+
+void plotParametricGraph() {
+  Rect<float> graphRect1(-1, 1, -1, 1);
+  Rect<int16_t> screenRect1(0, 79, 0, 79);
+  screen.plotParametricGraph(float_cos, float_sin, 0, 2 * PI, 500, graphRect1, screenRect1, RED);
+
+  Rect<float> graphRect2(-1, 1, -1, 1);
+  Rect<int16_t> screenRect2(80, 159, 0, 79);
+  float alpha = (float) n / (float) N;
+  screen.plotParametricGraph(
+    lissajous_x,
+    lissajous_y,
+    0,
+    2 * PI * alpha,
+    (uint16_t) (1000 * alpha),
+    graphRect2,
+    screenRect2,
+    erase ? WHITE : BLUE
+  );
+
+  n = n + 1 < N ? n + 1 : 0;
+  if (n == 0) {
+    erase = !erase;
+  }
 }

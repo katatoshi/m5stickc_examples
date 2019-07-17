@@ -19,6 +19,16 @@ struct Screen {
   Screen(int16_t screenWidth, int16_t screenHeight)
     : screenWidth(screenWidth), screenHeight(screenHeight) {}
   void plotGraph(float (*f)(float), Rect<float> graphRect, Rect<int16_t> screenRect, uint16_t color);
+  void plotParametricGraph(
+    float (*f)(float),
+    float (*g)(float),
+    float t_min,
+    float t_max,
+    uint16_t partitions,
+    Rect<float> graphRect,
+    Rect<int16_t> screenRect,
+    uint16_t color
+  );
 };
 
 #endif // INCLUDE_GUARD_HEADER_SCREEN_HPP
