@@ -24,7 +24,7 @@ void setup() {
 }
 
 void loop() {
-  printValues();
+  plotGraph();
   delay(DELAY_MS);
 }
 
