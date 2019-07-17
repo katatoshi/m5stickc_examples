@@ -10,8 +10,6 @@
 
 Adafruit_BME280 bme;
 
-bool parametric = false;
-
 void setup() {
   M5.begin();
   Wire.begin(32,33);
@@ -24,28 +22,11 @@ void setup() {
   M5.Lcd.fillScreen(WHITE);
   M5.Lcd.setTextColor(BLACK, WHITE);
 
-  reset();
+  setupScreenExamples();
 }
 
 void loop() {
-  if (parametric) {
-    plotParametricGraph();
-  } else {
-    plotGraph();
-  }
-
-  if (digitalRead(M5_BUTTON_RST) == LOW) {
-    reset();
-    while (digitalRead(M5_BUTTON_RST) == LOW);
-  }
-
-  if (digitalRead(M5_BUTTON_HOME) == LOW) {
-    parametric = !parametric;
-    reset();
-    while (digitalRead(M5_BUTTON_HOME) == LOW);
-  }
-
-  delay(DELAY_MS);
+  loopScreenExamples();
 }
 
 void printValues() {

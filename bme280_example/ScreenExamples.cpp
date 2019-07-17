@@ -88,3 +88,30 @@ void reset() {
 
   M5.Lcd.fillScreen(WHITE);
 }
+
+void setupScreenExamples() {
+  reset();
+}
+
+bool parametric = false;
+
+void loopScreenExamples() {
+  if (parametric) {
+    plotParametricGraph();
+  } else {
+    plotGraph();
+  }
+
+  if (digitalRead(M5_BUTTON_RST) == LOW) {
+    reset();
+    while (digitalRead(M5_BUTTON_RST) == LOW);
+  }
+
+  if (digitalRead(M5_BUTTON_HOME) == LOW) {
+    parametric = !parametric;
+    reset();
+    while (digitalRead(M5_BUTTON_HOME) == LOW);
+  }
+
+  delay(SCREEN_EXAMPLES_DELAY_MS);
+}

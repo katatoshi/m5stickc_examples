@@ -3,8 +3,9 @@
 
 #include "Screen.hpp"
 
-void plotGraph();
-void plotParametricGraph();
-void reset();
+#define SCREEN_EXAMPLES_DELAY_MS 33
+
+void setupScreenExamples();
+void loopScreenExamples();
 
 #endif // INCLUDE_GUARD_HEADER_SCREEN_EXAMPLES_HPP
