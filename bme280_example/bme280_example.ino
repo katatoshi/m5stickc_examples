@@ -14,6 +14,8 @@ void setup() {
 
   bme.begin();
 
+  M5.Axp.ScreenBreath(10);
+
   M5.Lcd.setRotation(3);
   M5.Lcd.fillScreen(WHITE);
   M5.Lcd.setTextColor(BLACK, WHITE);
