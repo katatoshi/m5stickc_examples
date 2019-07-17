@@ -34,7 +34,6 @@ void printValues() {
   M5.Lcd.println(" DegC");
 
   M5.Lcd.print("Pressure ");
-
   M5.Lcd.print(bme.readPressure() / 100.0F);
   M5.Lcd.println(" hPa");
 
