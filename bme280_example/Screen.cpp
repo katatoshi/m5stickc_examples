@@ -27,8 +27,8 @@ void Screen::plotGraph(float (*f)(float), Rect<float> graphRect, Rect<int16_t> s
   const int16_t v_min = screenRect.bottom < 0 ? 0 : screenRect.bottom;
   const int16_t v_max = screenHeight - 1 < screenRect.top ? screenHeight - 1 : screenRect.top;
 
-  float a = (u_max - u_min) / (x_max - x_min);
-  float c = (v_max - v_min) / (y_max - y_min);
+  float a = ((float) (u_max - u_min)) / ((float) (x_max - x_min));
+  float c = ((float) (v_max - v_min)) / ((float) (y_max - y_min));
 
   for (int16_t u = u_min; u <= u_max; u++) {
     int16_t v = (int16_t) (-(c * (f((u - u_min) / a + x_min) - y_min) + v_min) + screenHeight - 1);
@@ -80,8 +80,8 @@ void Screen::plotParametricGraph(
   const int16_t v_min = screenRect.bottom < 0 ? 0 : screenRect.bottom;
   const int16_t v_max = screenHeight - 1 < screenRect.top ? screenHeight - 1 : screenRect.top;
 
-  float a = (u_max - u_min) / (x_max - x_min);
-  float c = (v_max - v_min) / (y_max - y_min);
+  float a = ((float) (u_max - u_min)) / ((float) (x_max - x_min));
+  float c = ((float) (v_max - v_min)) / ((float) (y_max - y_min));
 
   float increment = (t_max - t_min) / partitions;
   for (uint16_t i = 0; i < partitions; i++) {
