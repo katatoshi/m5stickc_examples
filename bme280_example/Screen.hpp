@@ -29,6 +29,7 @@ struct Screen {
     Rect<int16_t> screenRect,
     uint16_t color
   );
+  void plotLineGraph(std::vector<float>& dataVector, Rect<int16_t> screenRect, uint16_t color);
 };
 
 #endif // INCLUDE_GUARD_HEADER_SCREEN_HPP

@@ -81,25 +81,66 @@ void plotParametricGraph() {
   }
 }
 
+std::random_device rd;
+
+std::uniform_real_distribution<float> ud(0, 1.0);
+
+std::vector<float> xs(100);
+
+void generateRandomVector() {
+  std::mt19937 mt(rd());
+  std::generate(xs.begin(), xs.end(), [&]() { return ud(mt); });
+}
+
+void plotLineGraph() {
+  for (float x : xs) {
+    Serial.println(x);
+  }
+  M5.Lcd.fillScreen(WHITE);
+  Rect<int16_t> screenRect(0, 159, 0, 79);
+  screen.plotLineGraph(xs, screenRect, BLACK);
+}
+
+bool needPlotLineGraph = true;
+
 void reset() {
   a = 0;
   n = 0;
   erase = false;
+  needPlotLineGraph = true;
+  generateRandomVector();
 
   M5.Lcd.fillScreen(WHITE);
 }
 
 void setupScreenExamples() {
   reset();
+  plotLineGraph();
 }
 
-bool parametric = false;
+enum Mode { normal, parametric, line };
+
+Mode m = normal;
+
+void changeMode() {
+  switch (m) {
+    case normal: m = parametric; break;
+    case parametric: m = line; break;
+    case line: m = normal; break;
+  }
+}
 
 void loopScreenExamples() {
-  if (parametric) {
-    plotParametricGraph();
-  } else {
-    plotGraph();
+  switch (m) {
+    case normal: plotGraph(); break;
+    case parametric: plotParametricGraph(); break;
+    case line: {
+      if (needPlotLineGraph) {
+        plotLineGraph();
+        needPlotLineGraph = false;
+      }
+      break;
+    }
   }
 
   if (digitalRead(M5_BUTTON_RST) == LOW) {
@@ -108,7 +149,7 @@ void loopScreenExamples() {
   }
 
   if (digitalRead(M5_BUTTON_HOME) == LOW) {
-    parametric = !parametric;
+    changeMode();
     reset();
     while (digitalRead(M5_BUTTON_HOME) == LOW);
   }
