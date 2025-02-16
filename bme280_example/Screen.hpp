@@ -2,6 +2,7 @@
 #define INCLUDE_GUARD_HEADER_SCREEN_HPP
 
 #include <M5StickC.h>
+#include <vector>
 
 template <typename T>
 struct Rect {

@@ -135,7 +135,7 @@ void Screen::plotLineGraph(std::vector<float>& dataVector, Rect<int16_t> screenR
   for (std::size_t i = 1; i < n; i++) {
     int16_t u_next = (int16_t) (a * i + u_min);
     int16_t v_next = (int16_t) (c * (dataVector[i] - y_min) + v_min);
-    M5.Lcd.drawLine(u, v, u_next, v_next, color);
+    M5.Lcd.drawLine(u, -v + screenHeight - 1, u_next, -v_next + screenHeight - 1, color);
 
     u = u_next;
     v = v_next;

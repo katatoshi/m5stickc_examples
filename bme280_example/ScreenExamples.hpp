@@ -1,6 +1,9 @@
 #ifndef INCLUDE_GUARD_HEADER_SCREEN_EXAMPLES_HPP
 #define INCLUDE_GUARD_HEADER_SCREEN_EXAMPLES_HPP
 
+#include <vector>
+#include <random>
+
 #include "Screen.hpp"
 
 #define SCREEN_EXAMPLES_DELAY_MS 33
